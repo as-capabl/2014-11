@@ -1,0 +1,116 @@
+\documentclass[twocolumn]{a5book}
+
+
+%cs4
+%378*154 カバーサイズ
+%350
+%mac OS X 10.5
+
+\AtBeginDvi{\special{pdf:docview <</ViewerPreferences <</Direction /R2L>> >>}}
+
+%\usepackage[dvipdfm]{graphicx}
+\usepackage{multicol}
+\usepackage{sfkanbun}
+\usepackage[burasage]{otf}
+\usepackage{ulem}
+\usepackage{afterpage}
+\usepackage{my_layout}
+\usepackage{kunten2e}
+\usepackage{indent}
+%\usepackage[coptic,arab,glag]{babel}
+%\usepackage[oldchurchslavonic]{babel}
+\usepackage[english]{babel}
+\usepackage{izhitsa}
+%\usepackage[T1]{fontenc}
+\usepackage{coptic}
+\usepackage{arabtex}
+
+
+\makeatletter
+
+\DefineJapaneseFamily{futomin}{futomin-b}{futomin-b-v}{futomin}
+\DefineJapaneseFamily{seika}{seika}{seika-v}{seika}
+\newcommand{\cavsize}{%
+    \@setfontsize\normalsize{7}{10}%
+    \futominfamily
+}
+\newcommand{\cavrubysize}{\@setfontsize\normalsize{4.3}{7}}
+\newcommand{\rubysize}{\tiny}
+
+
+\prebreakpenalty`っ=0
+\prebreakpenalty`ゃ=0
+\prebreakpenalty`ゅ=0
+\prebreakpenalty`ょ=0
+\prebreakpenalty`ぁ=0
+\prebreakpenalty`ぃ=0
+\prebreakpenalty`ぅ=0
+\prebreakpenalty`ぇ=0
+\prebreakpenalty`ぉ=0
+\postbreakpenalty`ー=0
+\postbreakpenalty`…=0
+
+
+\newenvironment{abst}{
+  \begin{multicols}{2}
+  \thispagestyle{empty}
+  \cavsize
+  \parindent=1zw
+  \def\rubysize{\cavrubysize}
+  \lineskiplimit=0pt
+  \lineskip=0pt
+}{\end{multicols}\def\rubysize{\tiny}\newpage}
+
+
+\newcommand{\pasteillust}[1]{\vbox to 1cm{%
+    \vspace*{-\medmargin}\vspace*{-9mm}%
+    \hbox to 1cm{%
+      \hspace*{-\headsep}\hspace*{-\topmargin}%
+      \hspace*{-\texmargin}\hspace{-9.45mm}%
+      \vbox{\yoko\includegraphics[bb=0 0 115mm 158mm]{#1}%
+      }\hss%
+    }\vss%
+  }\newpage%
+}%
+\newcommand{\pasteillustr}[1]{\vbox to 1cm{%
+    \vspace*{-53mm}%
+    \hbox to 1cm{%
+      \hspace*{-\headsep}\hspace*{-\topmargin}%
+      \hspace*{-\texmargin}\hspace{-7.60mm}%
+      \vbox{\yoko\includegraphics[bb=0 0 115mm 158mm]{#1}%
+      }\hss%
+    }\vss%
+  }\newpage%
+}%
+
+
+%\renewcommand{\pasteillust}[1]{\hbox{\tate\includegraphics[bb=0 0 158mm 115mm]{#1}}}
+
+\newcommand{\illust}[1]{\afterpage{\clearpage\pasteillust{../sashie/#1}}}
+
+\def\ps@headings{\let\ps@jpl@in\ps@empty
+  \let\@oddfoot\@empty
+  \def\@oddhead{\scriptsize\hbox{}\thepage\hspace{5mm}\rightmark\hfill}%
+  \def\@evenhead{\scriptsize{\leftmark}\hfil\thepage}%
+  \let\@mkboth\markboth
+    \def\chaptermark##1{\markboth{}{%
+   ##1}}%
+  }
+
+
+\makeatother
+
+
+\begin{document}
+\setcounter{page}{3}
+
+\twocolumn[
+\thispagestyle{empty}
+\vspace*{5cm}
+\LARGE 恋愛レギュラリゼーション
+]
+\clearpage
+
+\input{1-classroom}
+
+\end{document}

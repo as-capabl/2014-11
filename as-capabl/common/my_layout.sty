@@ -1,0 +1,69 @@
+%\ProvidesStyle{separate}
+
+%%
+%% フリガナ
+%%
+\def\ruby#1#2{%
+\leavevmode
+\setbox0=\hbox{#1}\setbox1=\hbox{\tiny#2\hspace{-3pt}}%
+\ifdim\wd0>\wd1 \dimen0=\wd0 \else \dimen0=\wd1 \fi
+\hbox{\kanjiskip=\fill
+\vbox{\hbox to \dimen0{\rubysize \hfil#2\hfil}%
+\nointerlineskip
+\hbox to \dimen0{\hfil#1\hfil}}}}
+
+%%
+%% 引用符
+%%
+\newcommand{\sdq}{\leavevmode\vbox to .5zh{\vss\hbox to 1zw {\raisebox{.7zh}{\hspace*{.6zw}”}\hss}}\hspace{\kanjiskip}}
+\newcommand{\edq}{\leavevmode\vbox to .5zh{\vss\hbox to 0pt {\raisebox{-.7zh}{\hspace*{.25zw}“}\hss}}\hspace{1zw}\hspace{\kanjiskip}}
+
+%%
+%% 傍点
+%%
+\def\bou#1{\ifvmode\leavevmode\fi\hspace{\kanjiskip}\@bou#1\end}
+\def\@bou#1{%
+  \ifx#1\end \let\next=\relax
+  \else
+    \iftdir\if@rotsw
+      \hbox to\z@{\vbox to\z@{\boxmaxdepth\maxdimen
+        \vss\moveleft-0.2zw\hbox{\boutenchar}\nointerlineskip
+        \hbox{\char\euc"A1A1}}\hss}\nobreak#1\relax
+    \else
+      \hbox to\z@{\vbox to\z@{\boxmaxdepth\maxdimen
+        \vss\moveleft0.2zw\hbox{\yoko\boutenchar}\nointerlineskip
+        \hbox{\char\euc"A1A1}}\hss}\nobreak#1\relax
+    \fi\else
+      \hbox to\z@{\vbox to\z@{%
+        \vss\moveleft-0.2zw\hbox{\yoko\boutenchar}\nointerlineskip
+        \hbox{\char\euc"A1A1}}\hss}\nobreak#1\relax %yatexが"を誤認する
+    \fi
+    \hspace{\kanjiskip}%
+    \let\next=\@bou
+  \fi\next}
+
+%%
+%% ダッシュ
+%%
+\newcommand{\dash}{\leavevmode\setbox0=\hbox{夜雀}%
+  \hspace{\kanjiskip}\hbox to \wd0{\hspace{.2pt}\hrulefill\hspace{.2pt}}%
+  \hspace{\kanjiskip}}
+%\newcommand{\dash}{―\nolinebreak\hspace{-2\kanjiskip}\nolinebreak―\hspace{2\kanjiskip}}
+\newcommand{\tendash}{…\nolinebreak…}
+
+%%
+%% 引用(ページ占有横組)
+%%
+\newenvironment{fullquotation}{
+\begin{minipage}<y>{.99\textheight}
+\vspace*{5cm}
+\thispagestyle{empty}
+\interlinepenalty=0
+\scriptsize
+\hspace*{-.05\textwidth}
+\begin{minipage}{1.05\textwidth}
+\begin{flushleft}}
+{
+\end{flushleft}
+\end{minipage}
+\end{minipage}}
